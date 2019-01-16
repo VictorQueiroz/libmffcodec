@@ -37,7 +37,7 @@ void test_serializer_float() {
     mff_deserializer_read_float(d, &id);
     assert(mff_deserializer_get_error(d) == MFF_DESERIALIZATION_RESULT_OK);
     assert(id == FLT_MIN);
-    
+
     mff_deserializer_read_float(d, &id);
     assert(mff_deserializer_get_error(d) == MFF_DESERIALIZATION_RESULT_OK);
     assert(id == FLT_MAX);
