@@ -43,5 +43,6 @@ void mff_serializer_destroy(mff_serializer*);
 void mff_serializer_write_string(mff_serializer*, const char* string);
 void mff_serializer_write_boolean(mff_serializer*, int value);
 uint8_t mff_serializer_get_error(mff_serializer*);
+void mff_serializer_write_buffer(mff_serializer*, uint8_t*, uint32_t);
 
 #endif //MFF_C_SERIALIZER_H

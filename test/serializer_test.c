@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <float.h>
+#include <string.h>
 
 void test_serializer_uint32() {
     mff_serializer* s;
@@ -46,7 +47,29 @@ void test_serializer_float() {
     mff_deserializer_destroy(d);
 }
 
+void test_serializer_buffer() {
+    mff_serializer* s;
+    mff_serializer_init(&s);
+
+    const char* string = "test string";
+    uint32_t string_length = (uint32_t) strlen(string);
+    mff_serializer_write_buffer(s, (uint8_t*) string, string_length);
+
+    mff_deserializer* d;
+    mff_deserializer_init(&d, s->buffer, s->offset);
+
+    char output[string_length + 1];
+    mff_deserializer_read_buffer(d, (uint8_t*) output, string_length);
+    output[string_length] = '\0';
+
+    assert(strcmp(output, "test string") == 0);
+
+    mff_serializer_destroy(s);
+    mff_deserializer_destroy(d);
+}
+
 void test_serializer() {
     test_serializer_uint32();
     test_serializer_float();
+    test_serializer_buffer();
 }
