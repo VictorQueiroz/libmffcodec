@@ -33,8 +33,8 @@ void mff_serializer_write_uint16(mff_serializer* serializer, uint16_t value) {
     mff_serializer_adjust_buffer_length(serializer, 2);
     MFF_SERIALIZER_RETURN_ON_FAILURE(serializer);
 
-    serializer->buffer[serializer->offset++] = (uint8_t) value;
-    serializer->buffer[serializer->offset++] = ((uint8_t) value) >> 8;
+    serializer->buffer[serializer->offset++] = value;
+    serializer->buffer[serializer->offset++] = value >> 8;
 }
 
 void mff_serializer_write_int32(mff_serializer* serializer, int32_t value) {

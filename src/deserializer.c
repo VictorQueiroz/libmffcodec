@@ -44,9 +44,10 @@ void mff_deserializer_read_uint32(mff_deserializer* d, uint32_t* value_ptr) {
 }
 
 void mff_deserializer_read_uint16(mff_deserializer* d, uint16_t* value_ptr) {
-    mff_deserializer_check_offset(d, 4);
+    mff_deserializer_check_offset(d, 2);
     MFF_DESERIALIZER_RETURN_ON_FAILURE(d);
 
+    *value_ptr = 0;
     *value_ptr += d->buffer[d->offset++];
     *value_ptr += d->buffer[d->offset++] << 8;
 }

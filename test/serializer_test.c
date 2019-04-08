@@ -68,8 +68,26 @@ void test_serializer_buffer() {
     mff_deserializer_destroy(d);
 }
 
+void test_serializer_int16() {
+    mff_serializer* s;
+    mff_serializer_init(&s);
+
+    mff_serializer_write_int16(s, 1000);
+
+    mff_deserializer* d;
+    mff_deserializer_init(&d, s->buffer, s->offset);
+
+    int16_t n = 0;
+    mff_deserializer_read_int16(d, &n);
+    assert(n == 1000);
+
+    mff_serializer_destroy(s);
+    mff_deserializer_destroy(d);
+}
+
 void test_serializer() {
     test_serializer_uint32();
     test_serializer_float();
     test_serializer_buffer();
+    test_serializer_int16();
 }
